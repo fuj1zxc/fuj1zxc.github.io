@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>La Peonia — цветочная мастерская в Твери</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Шаблон демо для бьюти-ниш: маникюр, брови/ресницы, салоны, барбершопы.
+     Цвета: --accent (основной), --accent2 (мягкий фон). Для барбершопа — тёмная тема (C.dark). */
+  :root{
+    --bg:#FBF8F5; --bg2:#F4EEE8; --card:#FFFFFF; --line:#E9E0D8;
+    --text:#2B2321; --muted:#857873; --on-accent:#fff;
+    --accent:#C2577A; --accent2:#F3D9E1;
+  }
+  body.dark{
+    --bg:#141210; --bg2:#1C1916; --card:#221E1A; --line:#35302A;
+    --text:#F3EDE6; --muted:#A79C90; --on-accent:#17130F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+  .muted{color:var(--muted)}
+  .serif{font-family:"Cormorant Garamond",Georgia,serif}
+
+  .demo-bar{background:var(--text);color:var(--bg);font-size:13px;font-weight:600;text-align:center;padding:8px 16px}
+  .demo-bar a{text-decoration:underline}
+
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+  .logo{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:26px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav-links{display:flex;gap:28px;font-weight:600;font-size:15px;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .nav-btn{background:var(--accent);color:var(--on-accent);font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;white-space:nowrap}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  .hero{padding:64px 0 72px;background:radial-gradient(700px 420px at 90% 0%,color-mix(in srgb,var(--accent2) 80%,transparent),transparent 70%)}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:14px;font-weight:600;color:var(--muted)}
+  .chip b{color:var(--accent)}
+  h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(44px,7vw,76px);line-height:1;margin:20px 0 18px;letter-spacing:-.5px}
+  h1 em{color:var(--accent)}
+  .lead{font-size:18px;color:var(--muted);max-width:500px}
+  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:700;font-size:16px;transition:transform .15s,opacity .15s;border:0;cursor:pointer}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-main{background:var(--accent);color:var(--on-accent)}
+  .btn-wa{background:#25D366;color:#0b2b17}
+  .btn-tg{background:#2AABEE;color:#fff}
+  .btn-ghost{border:1px solid var(--line);background:var(--card);color:var(--text)}
+
+  /* Арка с карточкой: рейтинг, адрес, график */
+  .arch{position:relative;border-radius:240px 240px 28px 28px;padding:56px 28px 28px;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(170deg,var(--accent2),color-mix(in srgb,var(--accent) 55%,var(--accent2)));overflow:hidden}
+  .arch::before{content:"";position:absolute;inset:18px;border:1px solid color-mix(in srgb,#fff 55%,transparent);border-radius:222px 222px 18px 18px;pointer-events:none}
+  .arch-name{position:absolute;top:96px;left:0;right:0;text-align:center;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(30px,4vw,42px);color:#fff;padding:0 40px;line-height:1.1;text-shadow:0 2px 20px rgba(0,0,0,.12)}
+  .info-card{position:relative;background:var(--card);border-radius:20px;padding:22px;box-shadow:0 20px 50px rgba(60,30,20,.12)}
+  .rating{display:flex;align-items:baseline;gap:10px}
+  .rating .num{font-family:"Cormorant Garamond",Georgia,serif;font-size:46px;font-weight:700;line-height:1}
+  .stars{color:var(--accent);font-size:18px;letter-spacing:2px}
+  .info-row{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+  .info-row:first-of-type{margin-top:14px}
+  .info-row .ic{width:20px;flex:none}
+  .open-badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;margin-left:6px}
+
+  .perks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-block:1px solid var(--line)}
+  @media(max-width:860px){.perks{grid-template-columns:1fr 1fr}}
+  .perk{background:var(--bg);padding:24px 20px;display:flex;gap:14px;align-items:center;font-weight:600;font-size:15px}
+  .perk i{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;color:var(--accent);font-weight:600;line-height:1}
+
+  section{padding:80px 0}
+  .sec-head{margin-bottom:34px}
+  .eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+  h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(36px,5vw,52px);line-height:1.05;margin-top:8px}
+  h2 em{color:var(--accent)}
+
+  /* Прайс как меню салона */
+  .menu{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  @media(max-width:760px){.menu{grid-template-columns:1fr}}
+  .item{display:flex;align-items:baseline;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .item .nm{font-weight:700;font-size:17px}
+  .item .ds{display:block;font-size:14px;color:var(--muted);margin-top:2px;font-weight:500}
+  .item .dots{flex:1;border-bottom:1px dotted color-mix(in srgb,var(--muted) 60%,transparent);transform:translateY(-5px);min-width:16px}
+  .item .pr{font-weight:800;white-space:nowrap;color:var(--accent)}
+  .item.more{display:none}
+  .menu.open .item.more{display:flex}
+  .menu-more{margin-top:24px}
+
+  .bg2{background:var(--bg2)}
+  .book{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}
+  @media(max-width:860px){.book{grid-template-columns:1fr}}
+  .steps{display:grid;gap:14px;margin-top:24px}
+  .steps div{display:flex;gap:14px;align-items:center;color:var(--muted);font-weight:500}
+  .steps b{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent2);color:var(--accent);font-weight:800;font-size:14px}
+  body.dark .steps b{background:var(--card)}
+  form.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;display:grid;gap:16px;box-shadow:0 20px 50px rgba(60,30,20,.06)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:480px){.row2{grid-template-columns:1fr}}
+  label{display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--muted)}
+  input,select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:13px 14px;font:600 16px Manrope}
+  body.dark input,body.dark select{color-scheme:dark}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  .slots{display:flex;flex-wrap:wrap;gap:8px}
+  .slot{background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 12px;font:700 14px Manrope;cursor:pointer}
+  .slot.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+  .slot:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+  .msgr{padding:11px 16px}
+  .msgr.on.wa{background:#25D366;border-color:#25D366;color:#0b2b17}
+  .msgr.on.tg{background:#2AABEE;border-color:#2AABEE;color:#fff}
+  .msgr.on.vb{background:#7360F2;border-color:#7360F2;color:#fff}
+  .form-err{color:#d6455d;font-size:14px;font-weight:600;min-height:20px}
+  form .btn{width:100%}
+  #services,#booking,#contacts{scroll-margin-top:66px}
+
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
+  .phones a{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);font-size:20px;font-weight:700}
+  .map{border-radius:24px;overflow:hidden;border:1px solid var(--line);min-height:340px;background:var(--card)}
+  .map iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* Фото: вывеска в арке, каталог, направления, отзывы */
+  .arch.photo{background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(40,20,25,.45)),url(img/shop.jpg) center 34%/cover}
+  .arch.photo .arch-name{display:none}
+  /* вывеска на фото смещена вправо — увеличиваем и сдвигаем, чтобы надпись была по центру арки */
+  .arch.photo{min-height:380px;background:#8d8d8b url(img/shop.jpg) right 25%/121% auto}
+  .menu-more[hidden]{display:none}
+  .arch.photo::before{display:none}
+  .info-card.under{margin-top:16px;box-shadow:none;border:1px solid var(--line)}
+  @media(max-width:480px){.arch.photo{min-height:300px}}
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px}
+  @media(max-width:860px){.gallery{grid-template-columns:1fr 1fr}}
+  .gallery figure{margin:0}
+  .gallery img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;display:block}
+  .gallery figcaption{font-size:14px;font-weight:600;color:var(--muted);margin-top:8px}
+  .dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:860px){.dirs{grid-template-columns:1fr}}
+  .dir{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+  .dir img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .dir div{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .dir h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;font-weight:600;line-height:1.1}
+  .dir p{color:var(--muted);font-size:15px;flex:1}
+  .dir a{color:var(--accent);font-weight:700;font-size:15px}
+  .revs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:860px){.revs{grid-template-columns:1fr}}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}
+  .rev .stars{font-size:15px}
+  .rev p{margin:10px 0 14px;font-size:15px}
+  .rev b{font-size:14px}
+  .rev span{font-size:13px;color:var(--muted)}
+  #dirs,#reviews{scroll-margin-top:66px}
+
+  .float-book{position:fixed;right:16px;bottom:16px;z-index:20;display:none;background:var(--accent);color:var(--on-accent);font-weight:800;padding:14px 22px;border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.25);transition:opacity .2s}
+  @media(max-width:760px){.float-book{display:inline-flex}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar" id="demoBar"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo" id="logo"></a>
+    <nav class="nav-links">
+      <a href="#services">Букеты</a>
+      <a href="#dirs">Подписка и декор</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#booking">Заказ</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="nav-btn" href="#booking" id="navBook">Записаться</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="chip" id="heroChip"></div>
+      <h1 id="heroTitle"></h1>
+      <p class="lead" id="heroLead"></p>
+      <div class="ctas" id="heroCtas"></div>
+    </div>
+    <div>
+      <div class="arch photo"><div class="arch-name" id="archName"></div></div>
+      <div class="info-card under" id="infoCard"></div>
+    </div>
+  </div>
+</div>
+
+<div class="perks" id="perks"></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow" id="svcEyebrow">Прайс</div><h2 id="svcTitle">Услуги <em>и цены</em></h2></div>
+    <div class="gallery">
+      <figure><img src="img/b1.jpg" alt="Букет с хризантемами и розами" loading="lazy"><figcaption>Нежные тона</figcaption></figure>
+      <figure><img src="img/b2.jpg" alt="Осенний букет с пионовидными розами" loading="lazy"><figcaption>Яркие акценты</figcaption></figure>
+      <figure><img src="img/b3.jpg" alt="Букет в крафте с хризантемами" loading="lazy"><figcaption>Авторская сборка</figcaption></figure>
+      <figure><img src="img/vitrina.jpg" alt="Свежие цветы в магазине" loading="lazy"><figcaption>Свежие цветы каждый день</figcaption></figure>
+    </div>
+    <div class="menu" id="menu"></div>
+    <button class="btn btn-ghost menu-more" id="menuMore" hidden></button>
+  </div>
+</section>
+
+<section id="dirs" class="bg2">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Не только букеты</div><h2>Подписка, свадьбы <em>и декор</em></h2></div>
+    <div class="dirs">
+      <div class="dir"><img src="img/podpiska.jpg" alt="Цветочная подписка" loading="lazy" style="object-position:center 12%"><div><h3>Цветочная подписка</h3><p>Свежий букет домой или в офис с регулярной доставкой. Вы выбираете бюджет и частоту, мы собираем каждый раз новый.</p><a href="#booking" data-pick="Цветочная подписка">Оформить подписку →</a></div></div>
+      <div class="dir"><img src="img/b1.jpg" alt="Свадебные букеты" loading="lazy" style="object-position:center 40%"><div><h3>Свадебные букеты</h3><p>Букет невесты, бутоньерки и цветы для гостей. Подберём под образ и стиль свадьбы.</p><a href="#booking" data-pick="Свадебный букет">Обсудить свадьбу →</a></div></div>
+      <div class="dir"><img src="img/decor.jpg" alt="Оформление декором" loading="lazy" style="object-position:center 0%"><div><h3>Декор и оформление</h3><p>Оформление входных групп, витрин, мероприятий и праздников, включая новогодний декор.</p><a href="#booking" data-pick="Декор и оформление">Заказать оформление →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">★ 4.8 · 27 оценок в 2ГИС</div><h2>Что говорят <em>наши клиенты</em></h2></div>
+    <div class="revs" id="revs"></div>
+  </div>
+</section>
+
+<section id="booking" class="bg2">
+  <div class="wrap book">
+    <div>
+      <div class="eyebrow" id="bookEyebrow">Онлайн-запись</div>
+      <h2 id="bookTitle">Запишитесь <em>за минуту</em></h2>
+      <p class="lead" style="margin-top:14px" id="bookLead">Выберите услугу, день и удобное время — без звонков и ожидания ответа.</p>
+      <div class="steps">
+        <div id="step1"><b>1</b> Заполните форму</div>
+        <div id="step2"><b>2</b> Заявка придёт мастеру в мессенджер</div>
+        <div id="step3"><b>3</b> Мастер подтвердит время</div>
+      </div>
+    </div>
+    <form class="card" id="bookForm" novalidate>
+      <div class="row2">
+        <label>Имя<input id="bName" autocomplete="name" placeholder="Анна"></label>
+        <label>Телефон<input id="bPhone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></label>
+      </div>
+      <label><span id="svcLabel">Услуга</span><select id="bSvc"></select></label>
+      <label id="extraWrap" hidden><span id="extraLabel"></span><input id="bExtra"></label>
+      <label>Дата<input id="bDate" type="date"></label>
+      <label>Время<div class="slots" id="bSlots"></div></label>
+      <label>Куда отправить заявку<div class="slots" id="bMsgr"></div></label>
+      <div class="form-err" id="bErr"></div>
+      <div class="muted" id="bOk" style="font-size:14px;display:none"></div>
+      <button class="btn btn-main" type="submit" id="bookBtn">Записаться</button>
+    </form>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Контакты</div><h2>Как <em>нас найти</em></h2></div>
+    <div class="contact-grid">
+      <div>
+        <div class="info-row"><span class="ic">📍</span><div id="cAddr"></div></div>
+        <div class="info-row"><span class="ic">🕗</span><div id="cHours"></div></div>
+        <div class="phones" id="cPhones"></div>
+        <div class="ctas" id="cCtas"></div>
+      </div>
+      <div class="map" id="map"></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap" id="footer"></div></footer>
+
+<a class="float-book" id="floatBook" href="#booking">Записаться</a>
+
+<script>
+const C = {"slug":"la-peonia-tver","demo":true,"author":{"name":"Даниил","contact":"https://t.me/webmdma"},"name":"La Peonia","category":"Цветочная мастерская","city":"Тверь","cityIn":"Твери","tagline":"Цветочный лофт в центре Твери. Авторские букеты от 3 000 ₽ и под любой бюджет, подписка, свадебная флористика и декор. Доставим к нужному времени","address":"бульвар Радищева, 12, Тверь","hours":"Ежедневно 9:00–21:00","rating":4.8,"reviewsCount":27,"reviewsLabel":"27 отзывов","phones":[{"label":"","number":"+7 (920) 151-50-50"}],"whatsapp":"","telegram":"+79201515050","viber":"","colors":{"accent":"#B4587A","accent2":"#F2DDE4"},"dark":false,"perks":["Букеты от 3 000 ₽ и под любой бюджет","Бесплатная доставка по Твери от 5 000 ₽","Скидка 300 ₽ на первый заказ","Доставка по Твери и области"],"labels":{"svcEyebrow":"Букеты","svcTitle":"Букеты \u003cem>и цены\u003c/em>","cta":"Заказать букет","navBtn":"Заказать","bookBtn":"Отправить заказ","bookEyebrow":"Заказ","bookTitle":"Закажите \u003cem>букет\u003c/em>","bookLead":"Выберите букет, дату и время — соберём и доставим к сроку.","step3":"Флорист свяжется и уточнит детали","who":"флористу","svcLabel":"Что заказать","msg":"Хочу заказать букет в","namePh":"Ольга","extra":"Повод и пожелания","extraPh":"Например: день рождения, нежные тона, до 3 000 ₽"},"noRadius":false,"services":[{"name":"Авторский букет","desc":"Соберём из свежих цветов под повод и настроение","note":"от 3 000 ₽"},{"name":"Букет на ваш бюджет","desc":"Назовите сумму — подберём лучший вариант"},{"name":"Композиция в коробке","desc":"Удобно дарить и везти, долго стоит"},{"name":"Букеты для коллег","desc":"Несколько разных композиций к празднику, доставим в офис"},{"name":"Цветочная подписка","desc":"Регулярная доставка свежих букетов"},{"name":"Свадебный букет","desc":"Букет невесты, бутоньерки, цветы для гостей"},{"name":"Декор и оформление","desc":"Входные группы, витрины, мероприятия"}],"tires":[],
+"instagram":"https://www.instagram.com/la_peonia_tver/",
+"reviews":[
+{"name":"Вера Лункина","date":"март 2026","text":"Один из самых красивых цветочных в Твери! Выбор просто потрясающий, букеты все очень красивые и подбирают на любой бюджет!"},
+{"name":"Николай Мусинов","date":"март 2026","text":"Неоднократно заказывал доставку — всегда красивые свежие цветы, аккуратная упаковка, доставка в срок. По просьбе упаковали в аква-бокс и в подарок дали средство для ухода за букетом."},
+{"name":"Ксения Гудий","date":"март 2026","text":"Собрали очень красивый букет, учли все мои пожелания, а также доставили ко времени. Определённо обращусь снова ☺️"},
+{"name":"Елена А","date":"март 2026","text":"Заказали всем коллегам небольшие композиции! Флористы собрали разные милые букеты. Видно, что относятся к бизнесу с любовью."},
+{"name":"Светлана Шмелёва","date":"март 2026","text":"Заказывали несколько букетов к 8 марта для коллег и родных. Свежайшие цветы, интересные композиции, детали! Доставка бережная, всё вовремя."},
+{"name":"Полина Бушева","date":"январь 2026","text":"Заказывали пять букетов — приятные впечатления от ассортимента и цен. Отдельное спасибо флористу Екатерине: собрала потрясающе красивые букеты с индивидуальным подходом."}
+]};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const tel = n => "tel:+" + String(n).replace(/\D/g, "");
+const digits = s => String(s).replace(/\D/g, "");
+
+if (C.dark) document.body.classList.add("dark");
+
+// Подписи — свои для каждой ниши (запись / бронь зала / предзаказ / заказ уборки). Не указано — как у салона.
+const L = Object.assign({
+  svcEyebrow: "Прайс", svcTitle: "Услуги <em>и цены</em>",
+  cta: "Записаться онлайн", navBtn: "Записаться", bookBtn: "Записаться",
+  bookEyebrow: "Онлайн-запись", bookTitle: "Запишитесь <em>за минуту</em>",
+  bookLead: "Выберите услугу, день и удобное время — без звонков и ожидания ответа.",
+  step1: "Заполните форму", step3: "Мастер подтвердит время", who: "мастеру",
+  svcLabel: "Услуга", namePh: "Анна", other: "Другое — уточню в сообщении",
+  msg: "Хочу записаться в", extra: "", extraPh: ""
+}, C.labels || {});
+$("navBook").textContent = L.navBtn;
+$("floatBook").textContent = L.navBtn;
+$("svcEyebrow").textContent = L.svcEyebrow;
+$("svcTitle").innerHTML = L.svcTitle;
+$("bookEyebrow").textContent = L.bookEyebrow;
+$("bookTitle").innerHTML = L.bookTitle;
+$("bookLead").textContent = L.bookLead;
+$("step1").innerHTML = `<b>1</b> ${esc(L.step1)}`;
+$("step3").innerHTML = `<b>3</b> ${esc(L.step3)}`;
+$("svcLabel").textContent = L.svcLabel;
+$("bName").placeholder = L.namePh;
+$("bookBtn").textContent = L.bookBtn;
+if (L.extra) { $("extraWrap").hidden = false; $("extraLabel").textContent = L.extra; $("bExtra").placeholder = L.extraPh; }
+if (C.colors) {
+  if (C.colors.accent) document.documentElement.style.setProperty("--accent", C.colors.accent);
+  if (C.colors.accent2) document.documentElement.style.setProperty("--accent2", C.colors.accent2);
+}
+
+// плашка «Демо-версия»
+if (C.demo) {
+  const a = C.author || {};
+  $("demoBar").innerHTML = `Демо-версия сайта для «${esc(C.name)}». Сделал ${esc(a.name || "")}` +
+    (a.contact ? ` — <a href="${esc(a.contact)}" target="_blank">написать</a>` : "");
+} else $("demoBar").remove();
+
+$("logo").textContent = C.name;
+$("archName").textContent = C.name;
+const mainPhone = (C.phones || [])[0]?.number;
+
+// открыто ли сейчас
+function openNow(hours) {
+  const m = String(hours).match(/(\d{1,2}):(\d{2})\s*[–-]\s*(\d{1,2}):(\d{2})/);
+  if (!m) return null;
+  const now = new Date(), mins = now.getHours() * 60 + now.getMinutes();
+  return mins >= m[1] * 60 + +m[2] && mins < m[3] * 60 + +m[4];
+}
+const isOpen = openNow(C.hours);
+const openBadge = isOpen === null ? "" : isOpen
+  ? `<span class="open-badge" style="background:rgba(37,211,102,.15);color:#1e9e52">Открыто</span>`
+  : `<span class="open-badge" style="background:rgba(214,69,93,.12);color:#d6455d">Закрыто</span>`;
+
+// первый экран
+const reviewsLine = esc(C.reviewsLabel || `${C.reviewsCount} отзывов`);
+$("heroChip").innerHTML = C.reviewsCount ? `<b>★ ${esc(C.rating)}</b> · ${reviewsLine} на картах` : `<b>★</b> Новое место в ${esc(C.cityIn || C.city)}`;
+$("heroTitle").innerHTML = `${esc(C.category)}<br><em>в ${esc(C.cityIn || C.city)}</em>`;
+$("heroLead").textContent = C.tagline || "";
+const waLink = C.whatsapp ? `https://wa.me/${digits(C.whatsapp)}` : null;
+$("heroCtas").innerHTML = `
+  <a class="btn btn-main" href="#booking">${esc(L.cta)}</a>
+  ${waLink ? `<a class="btn btn-wa" href="${waLink}" target="_blank">WhatsApp</a>` : mainPhone ? `<a class="btn btn-ghost" href="${tel(mainPhone)}">Позвонить</a>` : ""}`;
+
+const r = Math.round(C.rating || 0);
+$("infoCard").innerHTML = `
+  ${C.reviewsCount ? `<div class="rating"><span class="num">${esc(C.rating)}</span><span class="stars">${"★".repeat(r)}${"☆".repeat(5 - r)}</span></div>
+  <div class="muted" style="font-size:14px">${reviewsLine} на картах</div>` : ""}
+  <div class="info-row"><span class="ic">📍</span><div>${esc(C.address)}</div></div>
+  <div class="info-row"><span class="ic">🕗</span><div>${esc(C.hours)} ${openBadge}</div></div>`;
+
+// преимущества
+const perks = C.perks || [];
+if (perks.length) $("perks").innerHTML = perks.map((p, i) => `<div class="perk"><i>0${i + 1}</i>${esc(p)}</div>`).join("");
+else $("perks").remove();
+
+// прайс: цена справа, описание — мелко под названием
+const PRICE = /^(от\s*)?\d[\d\s]*(?:[.,]\d+)?(?:\s*[–-]\s*\d[\d\s]*)?\s*(₽|руб|р\.)/i;
+const SHOW = 8;
+const svcs = C.services || [];
+$("menu").innerHTML = svcs.map((s, i) => {
+  const isPrice = PRICE.test(String(s.note || "").trim());
+  const ds = s.desc || (!isPrice ? s.note : ""); // описание из прайса или типовое описание услуги
+  return `<div class="item${i >= SHOW ? " more" : ""}">
+    <div><span class="nm">${esc(s.name)}</span>${ds ? `<span class="ds">${esc(ds)}</span>` : ""}</div>
+    ${isPrice ? `<span class="dots"></span><span class="pr">${esc(s.note)}</span>` : ""}
+  </div>`;
+}).join("");
+if (svcs.length > SHOW) {
+  const more = $("menuMore");
+  const label = () => ($("menu").classList.contains("open") ? "Свернуть ↑" : `Показать все услуги (${svcs.length}) ↓`);
+  more.hidden = false;
+  more.textContent = label();
+  more.onclick = () => {
+    const open = $("menu").classList.toggle("open");
+    more.textContent = label();
+    if (!open) $("services").scrollIntoView({ behavior: "smooth" });
+  };
+}
+
+// контакты
+$("cAddr").textContent = C.address;
+$("cHours").innerHTML = `${esc(C.hours)} ${openBadge}`;
+$("cPhones").innerHTML = (C.phones || []).map(p => `<a href="${tel(p.number)}">${esc(p.number)}</a>`).join("");
+const tgRaw = C.telegram ? String(C.telegram).trim() : "";
+const tgBase = !tgRaw ? null : /^\+?\d[\d\s()-]{6,}$/.test(tgRaw) ? `https://t.me/+${digits(tgRaw)}` : `https://t.me/${tgRaw.replace(/^@|^https?:\/\/t\.me\//, "")}`;
+$("cCtas").innerHTML = `
+  ${waLink ? `<a class="btn btn-wa" href="${waLink}" target="_blank">WhatsApp</a>` : ""}
+  ${tgBase ? `<a class="btn btn-tg" href="${tgBase}" target="_blank">Telegram</a>` : ""}
+  ${C.viber ? `<a class="btn btn-ghost" href="viber://chat?number=%2B${digits(C.viber)}">Viber</a>` : ""}
+  ${C.instagram ? `<a class="btn btn-ghost" href="${esc(C.instagram)}" target="_blank">Instagram</a>` : ""}
+  <a class="btn btn-ghost" href="https://yandex.ru/maps/?text=${encodeURIComponent(C.address)}" target="_blank">Маршрут</a>`;
+
+// отзывы с 2ГИС
+$("revs").innerHTML = (C.reviews || []).map(r => `<div class="rev"><div class="stars">★★★★★</div><p>${esc(r.text)}</p><b>${esc(r.name)}</b><br><span>${esc(r.date)} · 2ГИС</span></div>`).join("");
+$("cCtas").style.marginTop = "22px";
+$("map").innerHTML = `<iframe loading="lazy" src="https://yandex.ru/map-widget/v1/?text=${encodeURIComponent(C.address)}&z=16"></iframe>`;
+
+// ---------- онлайн-запись: заявка уходит мастеру в мессенджер ----------
+(function booking() {
+  const hm = String(C.hours).match(/(\d{1,2}):\d{2}\s*[–-]\s*(\d{1,2}):\d{2}/);
+  const openH = hm ? +hm[1] : 10, closeH = hm ? +hm[2] : 20;
+  const step = C.bookingStepMin || 60;
+  const MSGR = [
+    C.whatsapp && { id: "wa", name: "WhatsApp", url: t => `https://wa.me/${digits(C.whatsapp)}?text=${encodeURIComponent(t)}` },
+    tgBase && { id: "tg", name: "Telegram", url: t => `${tgBase}?text=${encodeURIComponent(t)}`, copy: true },
+    C.viber && { id: "vb", name: "Viber", url: t => `viber://chat?number=%2B${digits(C.viber)}&draft=${encodeURIComponent(t)}`, copy: true }
+  ].filter(Boolean);
+  if (!MSGR.length) { $("booking").remove(); return; }
+  let msgr = MSGR[0].id;
+  function renderMsgr() {
+    $("bMsgr").innerHTML = MSGR.map(m => `<button type="button" class="slot msgr ${m.id} ${m.id === msgr ? "on" : ""}" data-m="${m.id}">${m.name}</button>`).join("");
+    $("bMsgr").querySelectorAll(".msgr").forEach(b => b.onclick = () => { msgr = b.dataset.m; renderMsgr(); });
+  }
+  renderMsgr();
+  $("step2").innerHTML = `<b>2</b> Заявка придёт ${esc(L.who)} в ${MSGR.map(m => m.name).join(" / ")}`;
+
+  $("bSvc").innerHTML = svcs.map(s => `<option>${esc(s.name)}</option>`).join("") + `<option>${esc(L.other)}</option>`;
+  // кнопки в блоке «Подписка, свадьбы и декор» сразу выбирают нужный пункт в форме
+  document.querySelectorAll("[data-pick]").forEach(a => a.addEventListener("click", () => { $("bSvc").value = a.dataset.pick; }));
+
+  const pad = n => String(n).padStart(2, "0");
+  const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const dateIn = $("bDate");
+  dateIn.min = iso(new Date());
+  const max = new Date(); max.setDate(max.getDate() + 30); dateIn.max = iso(max);
+  const start = new Date(); if (start.getHours() >= closeH - 1) start.setDate(start.getDate() + 1);
+  dateIn.value = iso(start);
+
+  let slot = null;
+  function renderSlots() {
+    const isToday = dateIn.value === iso(new Date());
+    const nowMin = new Date().getHours() * 60 + new Date().getMinutes();
+    let html = "";
+    for (let m = openH * 60; m < closeH * 60; m += step) {
+      const t = `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
+      const past = isToday && m <= nowMin + 30;
+      if (past && slot === t) slot = null;
+      html += `<button type="button" class="slot ${slot === t ? "on" : ""}" data-t="${t}" ${past ? "disabled" : ""}>${t}</button>`;
+    }
+    $("bSlots").innerHTML = html;
+    $("bSlots").querySelectorAll(".slot").forEach(b => b.onclick = () => { slot = b.dataset.t; renderSlots(); });
+  }
+  dateIn.onchange = renderSlots;
+  renderSlots();
+
+  // маска телефона
+  $("bPhone").addEventListener("input", e => {
+    let d = e.target.value.replace(/\D/g, "");
+    if (d.startsWith("8")) d = "7" + d.slice(1);
+    if (!d.startsWith("7")) d = "7" + d;
+    d = d.slice(0, 11);
+    const p = [d.slice(1, 4), d.slice(4, 7), d.slice(7, 9), d.slice(9, 11)];
+    e.target.value = "+7" + (p[0] ? ` (${p[0]}` : "") + (p[0].length === 3 ? ")" : "") +
+      (p[1] ? ` ${p[1]}` : "") + (p[2] ? `-${p[2]}` : "") + (p[3] ? `-${p[3]}` : "");
+  });
+
+  $("bookForm").onsubmit = e => {
+    e.preventDefault();
+    const name = $("bName").value.trim(), phone = $("bPhone").value.trim();
+    const err = !name ? "Укажите имя" : phone.replace(/\D/g, "").length < 11 ? "Укажите телефон полностью"
+      : !dateIn.value ? "Выберите дату" : !slot ? "Выберите время" : "";
+    $("bErr").textContent = err;
+    if (err) return;
+    const [y, mo, d] = dateIn.value.split("-");
+    const extra = L.extra && $("bExtra").value.trim();
+    const text = [
+      `Здравствуйте! ${L.msg} «${C.name}».`,
+      `${L.svcLabel}: ${$("bSvc").value}`,
+      ...(extra ? [`${L.extra}: ${extra}`] : []),
+      `Дата и время: ${d}.${mo}.${y} в ${slot}`,
+      `Имя: ${name}`,
+      `Телефон: ${phone}`
+    ].join("\n");
+    const m = MSGR.find(x => x.id === msgr);
+    // Telegram и Viber не всегда подставляют текст — копируем его, чтобы клиентка просто вставила
+    if (m.copy && navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+    const ok = $("bOk");
+    ok.style.display = "block";
+    ok.textContent = m.copy
+      ? `Открываем ${m.name}. Текст заявки скопирован — если он не появился в чате, просто вставьте его.`
+      : `Открываем ${m.name} — осталось нажать «Отправить».`;
+    if (m.id === "vb") location.href = m.url(text); else window.open(m.url(text), "_blank");
+  };
+})();
+
+// кнопка «Записаться» на телефоне: после первого экрана и пока форма не на экране
+const fb = $("floatBook");
+let formVisible = false;
+const toggleFb = () => { const show = scrollY > 500 && !formVisible && !!$("bookForm"); fb.style.opacity = show ? 1 : 0; fb.style.pointerEvents = show ? "auto" : "none"; };
+if ($("bookForm") && "IntersectionObserver" in window)
+  new IntersectionObserver(([e]) => { formVisible = e.isIntersecting; toggleFb(); }).observe($("bookForm"));
+addEventListener("scroll", toggleFb, { passive: true }); toggleFb();
+
+$("footer").innerHTML = `<div>© ${new Date().getFullYear()} ${esc(C.name)} · ${esc(C.category)}, ${esc(C.city)}</div><div>${esc(C.address)}</div>`;
+</script>
+</body>
+</html>
